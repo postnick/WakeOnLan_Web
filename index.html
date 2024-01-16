@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wake On LAN</title>
+</head>
+<body>
+    <h1>Choose a Device to Wake</h1>
+
+    <button onclick="wakeDevice('macmini')">MacMini</button> <br>
+    <button onclick="wakeDevice('op3070_win')">Optiplex 3070 sff Windows</button><br>
+    <button onclick="wakeDevice('op5000_desk')">Optiplex 5000 sff Desktop</button><br>
+    <button onclick="wakeDevice('op5000_prox')">Optiplex 5000 sff proxmox</button><br>
+
+    <script>
+        function wakeDevice(device) {
+            // Send the selected device to a PHP script
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "wake_device.php?device=" + device, true);
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
