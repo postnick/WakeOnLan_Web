@@ -9,7 +9,7 @@ $allowedDevices = ['PC1', 'PC2','PC3','PC4'];
 if (in_array($device, $allowedDevices)) {
     // Execute the bash script with wakeonlan command
     // Be sure to update the Path here to your storage location. I tried above maybe can fix later
-    $bashScriptPath = "/PATH/TO/Your/FILES/wake_devices/wake_$device.sh";
+    $bashScriptPath = "/PATH/TO/Your/FILES/wake_files/wake_$device.sh";
     exec("bash $bashScriptPath");
     echo "Wake command sent for $device";
 } else {
