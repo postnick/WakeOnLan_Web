@@ -32,6 +32,11 @@ In the file [[wake_device.php]] you'll see this code where it appends the term '
 ```
 
 
+# Requirements
+1. Web Server, I think Apache 2
+2. PHP on device
+3. wakeonlan on device
+4. security at your own risk maybe don't expose to the net. 
 <br>
 <hr>
 
