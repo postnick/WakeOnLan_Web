@@ -10,11 +10,11 @@
             color: #fff; /* Set text color to light color */
             text-align: center; /* Center-align text */
             padding: 20px; /* Add some padding for better readability */
-            font-family: monospace,monospace:
+	    font-family: monospace,monospace:
         }
         h1 {
             color: #55ACEE; /* Set header color to a lighter shade */
-            font-faimly: monospace, monospace; 
+	    font-faimly: monospace, monospace; 
         }
         button {
             background-color: #66757F; /* Set button background color */
@@ -23,11 +23,23 @@
             margin: 5px; /* Add margin for better spacing */
             border: none; /* Remove button border */
             cursor: pointer; /* Add pointer cursor on hover */
-            font-family: monospace, monospace;
-            font-size: 20px; /*Set the font size for buttons */
+	    font-family: monospace, monospace;
+	    font-size: 20px; /*Set the font size for buttons */
         }
+	#message {
+            margin-top: 20px;
+            padding: 10px;
+        }
+        .success {
+            background-color: #4CAF50;
+        }
+        .failure {
+            background-color: #f44336;
+        }
+
     </style>
 </head>
+
 <body>
     <h1>Choose a Device to Wake</h1>
 
@@ -35,14 +47,31 @@
     <button onclick="wakeDevice('PC2')">PC2</button><br>
     <button onclick="wakeDevice('PC3')">PC3</button><br>
     <button onclick="wakeDevice('PC4')">PC4</button><br>
+    <!-- Add more buttons as needed -->
+    <!-- Make sure you don't uppercate WakeDevice -->
+    
+ <div id="message"></div> <!-- This is where the success/failure message will be displayed -->
 
-    <script>
-        function wakeDevice(device) {
-            // Send the selected device to a PHP script
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "wake_device.php?device=" + device, true);
-            xhr.send();
-        }
-    </script>
+ <script>
+     function wakeDevice(device) {
+         var xhr = new XMLHttpRequest();
+         xhr.open("GET", "wake_device.php?device=" + device, true);
+
+         xhr.onreadystatechange = function () {
+             if (xhr.readyState == 4 && xhr.status == 200) {
+                 var messageDiv = document.getElementById("message");
+                 if (xhr.responseText.includes("Success")) {
+                     messageDiv.innerHTML = "Operation successful!";
+                     messageDiv.className = "success";
+                 } else {
+                     messageDiv.innerHTML = "Operation failed!";
+                     messageDiv.className = "failure";
+                 }
+             }
+         };
+         xhr.send();
+     }
+ </script>
+
 </body>
 </html>
