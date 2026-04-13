@@ -1,9 +1,13 @@
 <!DOCTYPE html>
+<!-- Author: Nick -->
+<!-- Date: April 13, 2026 -->
+<!-- Note: Overhauled by Copilot -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wake On LAN</title>
+    <!-- CSS styles for the page layout and appearance -->
     <style>
         body {
             background-color: #292F33;
@@ -50,11 +54,16 @@
     </style>
 </head>
 <body>
+    <!-- Main heading for the page -->
     <h1>Choose a Device to Wake</h1>
+    <!-- Container for the device buttons -->
     <div id="buttonContainer"></div>
+    <!-- Message display area for feedback -->
     <div id="message" aria-live="polite"></div>
 
+    <!-- JavaScript for dynamic button creation and wake request handling -->
     <script>
+        // Array of devices with their IDs and labels
         const devices = [
             { id: 'PC1', label: 'PC1' },
             { id: 'PC2', label: 'PC2' },
@@ -62,6 +71,7 @@
             { id: 'PC4', label: 'PC4' },
         ];
 
+        // Get the container element and create buttons for each device
         const container = document.getElementById('buttonContainer');
         devices.forEach(device => {
             const button = document.createElement('button');
@@ -71,16 +81,19 @@
             container.appendChild(button);
         });
 
+        // Function to set and display messages to the user
         function setMessage(text, statusClass) {
             const messageDiv = document.getElementById('message');
             messageDiv.textContent = text;
             messageDiv.className = statusClass;
         }
 
+        // Asynchronous function to send wake request to the server
         async function wakeDevice(device) {
             setMessage('Sending wake request...', '');
 
             try {
+                // Send POST request to wake_device.php with the device parameter
                 const response = await fetch('wake_device.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
