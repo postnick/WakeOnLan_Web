@@ -1,4 +1,5 @@
-# WakeOnLan_Web
+# Wake_on_lan
+
 My personal Setup for Wake On Lan web landing page
 
 This will have next to no utility for most people but in the internest of saving on some electricity at night and allowing for your homelab if you can enable Wake on lan on a low power device.
@@ -6,38 +7,54 @@ This will have next to no utility for most people but in the internest of saving
 Use the Wake Better suggestion it's way fewer files to manage
 
 
-
-# Tips
+## Tips
 In most BIOS you will need to dissable Deep sleep or dissable S4/S5 Sleep for Wake on Lan to work.
 
 
 The structure of your webpage is proboably like mine so for example I keep everything in 
 
-```shell
-/var/www/html/wake/
+```bash
+    /var/www/html/wake/
 ```
 
 Each bash file needs to have the prefex 'wake_' followed by the variable name defined in the index.html file.
+<hr>
 
-### Example
+### Examples
 we have a bash file called wake_PC1.sh and wake_PC2.sh - you can give these whatever name you want.
-``` HTML
-    <button onclick="wakeDevice('PC1')">PC1 Text on Button</button> <br>
-    <button onclick="wakeDevice('PC2')">PC2 Text on Button</button><br>
-```
-In the file [[wake_device.php]] you'll see this code where it appends the term 'wake_' to your PC 1
-``` php 
-    // $bashScriptPath = "/PATH/TO/Your/FILES/wake_files/wake_$device.sh";
-    $bashScriptPath = "/var/www/html/wake/wake_files/wake_$device.sh";
-```
 
 
-# Requirements
-1. Web Server, I think Apache 2
-2. PHP on device
-3. wakeonlan on device
-4. security at your own risk maybe don't expose to the net. 
+<hr>
+
+
+## Requirements
+- Web Server, I think Apache 2
+- PHP on device
+- wakeonlan on device
+- security at your own risk maybe don't expose to the net. 
 <br>
 <hr>
 
-Credit given to Chat GPT to get me 95% of the way here. 
+
+###  Help from Chat GPT
+
+The code for getting the update pushed to the web server. 
+
+```bash
+    #!/bin/bash
+    cd /opt/Wake_on_lan || exit
+    git pull
+    rsync -av --delete ./ /var/www/html/wake --exclude .git
+    chown -R www-data:www-data /var/www/html
+```
+
+<br><br>
+<hr>
+
+### Transprancy with useage of AI
+This project was created with the help of AI, specifically ChatGPT. The AI assisted in generating code snippets, providing suggestions for structuring the project, and offering guidance on best practices for implementing Wake on LAN functionality. The AI's contributions were instrumental in shaping the overall design and functionality of the project, making it more efficient and user-friendly. 
+
+I did however review and test all of the code to make sure it actually works in my implementations. 
+
+### License
+No license, do whatever you want with it. but in the spirit of open source and sharing, if you make improvements or have suggestions please share them back with me.
